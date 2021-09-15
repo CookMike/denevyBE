@@ -67,24 +67,24 @@ class BlogAuthorIdService(val db:BlogRepository){
 }
 @Service
 class BlogPostService(val db:BlogRepository){
-    fun post(blog: Blog): List<Blog> = db.post()
+    fun post(blog: Blog): Blog = db.save(blog)
 }
 
 interface BlogRepository: CrudRepository<Blog, String> {
 
-    @Query("select * from blogs LIMIT 10 OFFSET 20")
+    @Query("SELECT * FROM blogs LIMIT 10 OFFSET 20")
     fun findBlogs(): List<Blog>
 
-    @Query("select * from blogs WHERE id= :id LIMIT 10 OFFSET 20")
+    @Query("SELECT * FROM blogs WHERE id= :id LIMIT 10 OFFSET 20")
     fun findBlogsById(): List<Blog>
 
-    @Query("select * from blogs WHERE title= :title LIMIT 10 OFFSET 20")
+    @Query("SELECT * FROM blogs WHERE title= :title LIMIT 10 OFFSET 20")
     fun findBlogsByTitle(): List<Blog>
 
-    @Query("select * from blogs WHERE authorId= :authorId LIMIT 10 OFFSET 20")
+    @Query("SELECT * FROM blogs WHERE authorId= :authorId LIMIT 10 OFFSET 20")
     fun findBlogsByAuthorId(): List<Blog>
 
-    @Query("insert into blogs (id, title, content, authorId) values(id=:id, title=:title, content=:content, authorId=:authorId) LIMIT 10 OFFSET 20")
+    @Query("INSERT INTO blogs (id, title, content, authorId) values(id=:id, title=:title, content=:content, authorId=:authorId) LIMIT 10 OFFSET 20")
     fun post(): List<Blog>
 }
 
