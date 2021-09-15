@@ -67,7 +67,7 @@ class BlogAuthorIdService(val db:BlogRepository){
 }
 @Service
 class BlogPostService(val db:BlogRepository){
-    fun post(blog: Blog): Blog = db.save(blog)
+    fun post(blog: Blog): List<Blog> = db.post()
 }
 
 interface BlogRepository: CrudRepository<Blog, String> {
